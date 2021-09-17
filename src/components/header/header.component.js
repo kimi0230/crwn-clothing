@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./header.style.scss";
+import { auth } from "../../firebase/firebase.utils";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 const Header = ({ currentUser }) => (
@@ -15,9 +16,17 @@ const Header = ({ currentUser }) => (
       <Link className="option" to="/shop">
         CONTACT
       </Link>
-      <Link className="option" to="/signin">
-        SIGN IN
-      </Link>
+      {currentUser ? (
+        // 已登入 顯示登出選項
+        <div className="option" onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        // 未登入 顯示登入選項
+        <Link className="option" to="/signin">
+          SIGN IN
+        </Link>
+      )}
     </div>
   </div>
 );
