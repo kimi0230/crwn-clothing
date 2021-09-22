@@ -1,12 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  doc,
-  // collection,
-  // query,
-  // where,
-  getDoc,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // https://stackoverflow.com/questions/68946446/how-do-i-fix-a-firebase-9-0-import-error-attempted-import-error-firebase-app
 
@@ -29,15 +22,27 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return;
   }
   console.log("userAuth.uid", `${userAuth.uid}`);
-  // const userRef = getDocs(`users/${userAuth.uid}`);
-
   const userRef = doc(firestore, "users", `${userAuth.uid}`);
   // const userRef = doc(firestore, "users", "z96H7HhXJo5TQvs5Ii5g");
   const userShot = await getDoc(userRef);
   if (!userShot.exists()) {
-    console.log("kkkkkkkkkkkk");
+    // 在 firestore 沒找到, 新增一筆
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    console.log(displayName, email);
+    try {
+      await setDoc(userRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
   }
   console.log("userShot", userShot);
+  return userRef;
 };
 
 // 登入/註冊 跳出google帳號選擇
