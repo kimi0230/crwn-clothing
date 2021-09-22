@@ -20,25 +20,29 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    // 帳號登入後, 狀態會產生變化
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         // https://firebase.google.com/docs/firestore/query-data/listen#web-version-9
         const userRef = await createUserProfileDocument(userAuth);
         onSnapshot(userRef, (doc) => {
-          console.log("Current data: ", doc.data());
-          this.setState({
-            currentUser: {
-              id: doc.id,
-              ...doc.data(),
+          console.log("Snapshot data: ", doc.data());
+          console.log("Snapshot id: ", doc.id);
+          this.setState(
+            {
+              currentUser: {
+                id: doc.id,
+                ...doc.data(),
+              },
             },
-          });
+            () => {
+              console.log("currentUser: ", this.state);
+            }
+          );
         });
-
-        console.log("[NEW] this.state : ", this.state);
+      } else {
+        this.setState({ currentUser: userAuth });
       }
-
-      // console.log("this.state : ", this.state);
-      this.setState({ currentUser: userAuth });
     });
   }
 
