@@ -1,6 +1,6 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // https://stackoverflow.com/questions/68946446/how-do-i-fix-a-firebase-9-0-import-error-attempted-import-error-firebase-app
 
 const config = {
@@ -13,13 +13,47 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-firebase.initializeApp(config);
+const app = initializeApp(config);
+export const auth = getAuth();
+export const firestore = getFirestore(app);
+// const analytics = getAnalytics(app);
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) {
+    return;
+  }
 
-const provider = new firebase.auth.GoogleAuthProvider();
+  /* 建立快照
+  You can listen to a document with the onSnapshot() method. An initial call using the callback you provide creates a document snapshot immediately with the current contents of the single document. Then, each time the contents change, another call updates the document snapshot.
+  */
+  const userRef = doc(firestore, "users", `${userAuth.uid}`);
+  const userShot = await getDoc(userRef);
+
+  // 找出是否有此 user 在 firestore
+  if (!userShot.exists()) {
+    // 在 firestore 沒找到, 新增一筆
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    console.log(displayName, email);
+    try {
+      await setDoc(userRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+
+  return userRef;
+};
+
+// 登入, 註冊時, 跳出google帳號選擇
+const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = async () =>
+  await signInWithPopup(auth, provider);
 
-export default firebase;
+export default app;
