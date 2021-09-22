@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
+  doc,
   // collection,
   // query,
   // where,
-  // getDocs,
+  getDoc,
 } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // https://stackoverflow.com/questions/68946446/how-do-i-fix-a-firebase-9-0-import-error-attempted-import-error-firebase-app
@@ -20,20 +21,26 @@ const config = {
 };
 
 const app = initializeApp(config);
+export const auth = getAuth();
+export const firestore = getFirestore(app);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {
     return;
   }
-  // const userRef = app.getDocs(`users/${userAuth.uid}`);
-  // const snapShot = await userRef.get();
+  console.log("userAuth.uid", `${userAuth.uid}`);
+  // const userRef = getDocs(`users/${userAuth.uid}`);
 
-  // console.log(snapShot);
+  const userRef = doc(firestore, "users", `${userAuth.uid}`);
+  // const userRef = doc(firestore, "users", "z96H7HhXJo5TQvs5Ii5g");
+  const userShot = await getDoc(userRef);
+  if (!userShot.exists()) {
+    console.log("kkkkkkkkkkkk");
+  }
+  console.log("userShot", userShot);
 };
 
-export const auth = getAuth();
-export const firestore = getFirestore(app);
-
+// 登入/註冊 跳出google帳號選擇
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = async () =>
