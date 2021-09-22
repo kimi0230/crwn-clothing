@@ -14,19 +14,22 @@ const config = {
 };
 
 const app = initializeApp(config);
-// const analytics = getAnalytics(app);
 export const auth = getAuth();
 export const firestore = getFirestore(app);
+// const analytics = getAnalytics(app);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {
     return;
   }
 
-  // 找出是否有此 user 在 firestore
+  /* 建立快照
+  You can listen to a document with the onSnapshot() method. An initial call using the callback you provide creates a document snapshot immediately with the current contents of the single document. Then, each time the contents change, another call updates the document snapshot.
+  */
   const userRef = doc(firestore, "users", `${userAuth.uid}`);
-
   const userShot = await getDoc(userRef);
+
+  // 找出是否有此 user 在 firestore
   if (!userShot.exists()) {
     // 在 firestore 沒找到, 新增一筆
     const { displayName, email } = userAuth;
@@ -44,11 +47,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
 
-  // console.log("userShot", userShot);
   return userRef;
 };
 
-// 登入/註冊 跳出google帳號選擇
+// 登入, 註冊時, 跳出google帳號選擇
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = async () =>
