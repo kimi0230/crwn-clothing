@@ -14,6 +14,7 @@ const config = {
 };
 
 const app = initializeApp(config);
+// const analytics = getAnalytics(app);
 export const auth = getAuth();
 export const firestore = getFirestore(app);
 
@@ -21,9 +22,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {
     return;
   }
-  console.log("userAuth.uid", `${userAuth.uid}`);
+
+  // 找出是否有此 user 在 firestore
   const userRef = doc(firestore, "users", `${userAuth.uid}`);
-  // const userRef = doc(firestore, "users", "z96H7HhXJo5TQvs5Ii5g");
+
   const userShot = await getDoc(userRef);
   if (!userShot.exists()) {
     // 在 firestore 沒找到, 新增一筆
@@ -41,7 +43,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("error creating user", error.message);
     }
   }
-  console.log("userShot", userShot);
+
+  // console.log("userShot", userShot);
   return userRef;
 };
 

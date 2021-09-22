@@ -5,6 +5,7 @@ import ShopPage from "./views/shop/shop";
 import SignInSignUpPage from "./views/signin_signup/signin_signup";
 import Header from "./components/header/header.component.js";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { onSnapshot } from "firebase/firestore";
 import "./App.css";
 
 class App extends React.Component {
@@ -21,21 +22,23 @@ class App extends React.Component {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
+        // https://firebase.google.com/docs/firestore/query-data/listen#web-version-9
         const userRef = await createUserProfileDocument(userAuth);
-        // userRef.onSnapshot((snapShot) => {
-        //   this.setState({
-        //     currentUser: {
-        //       id: snapShot.id,
-        //       ...snapShot.data(),
-        //     },
-        //   });
+        onSnapshot(userRef, (doc) => {
+          console.log("Current data: ", doc.data());
+          this.setState({
+            currentUser: {
+              id: doc.id,
+              ...doc.data(),
+            },
+          });
+        });
 
-        //   console.log(this.state);
-        // });
+        console.log("[NEW] this.state : ", this.state);
       }
 
+      // console.log("this.state : ", this.state);
       this.setState({ currentUser: userAuth });
-      console.log("this.state : ", this.state);
     });
   }
 
