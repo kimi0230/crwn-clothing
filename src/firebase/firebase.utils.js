@@ -1,6 +1,12 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  // collection,
+  // query,
+  // where,
+  // getDocs,
+} from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // https://stackoverflow.com/questions/68946446/how-do-i-fix-a-firebase-9-0-import-error-attempted-import-error-firebase-app
 
 const config = {
@@ -13,13 +19,24 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-firebase.initializeApp(config);
+const app = initializeApp(config);
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) {
+    return;
+  }
+  // const userRef = app.getDocs(`users/${userAuth.uid}`);
+  // const snapShot = await userRef.get();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+  // console.log(snapShot);
+};
+
+export const auth = getAuth();
+export const firestore = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = async () =>
+  await signInWithPopup(auth, provider);
 
-export default firebase;
+export default app;
