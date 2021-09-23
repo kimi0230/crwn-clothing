@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 // https://stackoverflow.com/questions/68946446/how-do-i-fix-a-firebase-9-0-import-error-attempted-import-error-firebase-app
 
@@ -24,6 +25,8 @@ export const firestore = getFirestore(app);
 // const analytics = getAnalytics(app);
 export const createUserWithEmail = async (auth, email, password) =>
   await createUserWithEmailAndPassword(auth, email, password);
+export const signInWithEmail = async (auth, email, password) =>
+  await signInWithEmailAndPassword(auth, email, password);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) {

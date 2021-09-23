@@ -26,8 +26,8 @@ class App extends React.Component {
         // https://firebase.google.com/docs/firestore/query-data/listen#web-version-9
         const userRef = await createUserProfileDocument(userAuth);
         onSnapshot(userRef, (doc) => {
-          console.log("Snapshot data: ", doc.data());
-          console.log("Snapshot id: ", doc.id);
+          // console.log("Snapshot data: ", doc.data());
+          // console.log("Snapshot id: ", doc.id);
           this.setState(
             {
               currentUser: {
@@ -36,7 +36,7 @@ class App extends React.Component {
               },
             },
             () => {
-              console.log("currentUser: ", this.state);
+              // console.log("currentUser: ", this.state);
             }
           );
         });
@@ -47,6 +47,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
+    // Whenever we call the onAuthStateChanged() or onSnapshot() methods from our auth  library or referenceObject, we get back a function that lets us unsubscribe from the listener we just instantiated. Which lifecycle method should we use to call that unsubscribe method in?
     this.unsubscribeFromAuth();
   }
 
