@@ -2,7 +2,11 @@ import React from "react";
 
 import FormInput from "../form_input/form_input.component";
 import CustomButton from "../custom_button/custom_button.component";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import {
+  auth,
+  signInWithGoogle,
+  signInWithEmail,
+} from "../../firebase/firebase.utils";
 import "./signin.styles.scss";
 
 class SignIn extends React.Component {
@@ -14,10 +18,16 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await signInWithEmail(auth, email, password);
+      // 清除 form
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleChange = (event) => {
@@ -51,7 +61,15 @@ class SignIn extends React.Component {
           />
           <div className="buttons">
             <CustomButton type="submit"> Sign in </CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            {/* any buttons inside of a form element will cause the form to treat
+            the button as type="submit" by default. We don't want that for our
+            google sign in button though, so just make sure to add type="button"
+            to our google sign in CustomButton. */}
+            <CustomButton
+              type="button"
+              onClick={signInWithGoogle}
+              isGoogleSignIn
+            >
               Sign in with Google
             </CustomButton>
           </div>
