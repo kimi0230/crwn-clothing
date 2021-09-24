@@ -8,18 +8,15 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { onSnapshot } from "firebase/firestore";
 import "./App.css";
 
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/user.actions";
+
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     // 帳號登入後, 狀態會產生變化
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -28,17 +25,10 @@ class App extends React.Component {
         onSnapshot(userRef, (doc) => {
           // console.log("Snapshot data: ", doc.data());
           // console.log("Snapshot id: ", doc.id);
-          this.setState(
-            {
-              currentUser: {
-                id: doc.id,
-                ...doc.data(),
-              },
-            },
-            () => {
-              // console.log("currentUser: ", this.state);
-            }
-          );
+          setCurrentUser({
+            id: doc.id,
+            ...doc.data(),
+          });
         });
       } else {
         this.setState({ currentUser: userAuth });
@@ -55,7 +45,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Header currentUser={this.state.currentUser} />
+          <Header />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
@@ -67,4 +57,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(App);
