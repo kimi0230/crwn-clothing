@@ -2,8 +2,15 @@
 
 React, Firebase v9(auth, firestore)
 
+
+## CRA
 ```shell
 npx create-react-app crwn-clothing --template cra-template-
+```
+
+## Redux
+```shell
+yarn add redux redux-logger react-redux
 ```
 
 
