@@ -13,6 +13,10 @@ npx create-react-app crwn-clothing --template cra-template-paw
 yarn add redux redux-logger react-redux
 ```
 
+## Reslect
+```shell
+yarn add reselect
+```
 
 * https://github.com/ZhangMYihua
 * [cubic-bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)
