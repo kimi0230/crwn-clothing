@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import CustomButton from "../custom_button/custom_button.component";
 import CartItem from "../cart_item/cart_item.componemt";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
@@ -21,8 +22,12 @@ const CartDropdown = ({ cartItems }) => (
 // 將 redux的 state 給 componet的 props
 // https://react-redux.js.org/using-react-redux/connect-mapstate
 // ({ cart: { cartItems } })} 的 cart 是 root_reducer.js 的 cart
-const mapStateToProps = (state) => ({
-  cartItems: selectCartItems(state),
+// const mapStateToProps = (state) => ({
+//   cartItems: selectCartItems(state),
+// });
+
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems,
 });
 
 export default connect(mapStateToProps)(CartDropdown);
