@@ -1,20 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { withRouter } from "react-router-dom";
 import CustomButton from "../custom_button/custom_button.component";
 import CartItem from "../cart_item/cart_item.componemt";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 
 import "./cart_dropdown.styles.scss";
 
-const CartDropdown = ({ cartItems }) => (
+const CartDropdown = ({ cartItems, history }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem.id} item={cartItem} />
-      ))}
+      {cartItems.length ? (
+        cartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} item={cartItem} />
+        ))
+      ) : (
+        <span className="empty-message">Your cart is empty</span>
+      )}
     </div>
-    <CustomButton>GO TO CHECKOUT</CustomButton>
+    <CustomButton onClick={() => history.push("/checkout")}>
+      GO TO CHECKOUT
+    </CustomButton>
   </div>
 );
 
@@ -30,4 +37,6 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-export default connect(mapStateToProps)(CartDropdown);
+// withRouter：一個HOC，可以把match、location、history當成props傳入component中
+// withRouter 將在每次使用與渲染相同的道具改變路線時重新渲染其組件props: { match, location, history }
+export default withRouter(connect(mapStateToProps)(CartDropdown));
