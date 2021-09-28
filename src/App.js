@@ -23,16 +23,15 @@ class App extends React.Component {
         // https://firebase.google.com/docs/firestore/query-data/listen#web-version-9
         const userRef = await createUserProfileDocument(userAuth);
         onSnapshot(userRef, (doc) => {
-          // console.log("Snapshot data: ", doc.data());
+          console.log("Snapshot data: ", doc.data());
           // console.log("Snapshot id: ", doc.id);
           setCurrentUser({
             id: doc.id,
             ...doc.data(),
           });
         });
-      } else {
-        this.setState({ currentUser: userAuth });
       }
+      setCurrentUser(userAuth);
     });
   }
 
