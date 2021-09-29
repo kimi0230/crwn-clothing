@@ -13,9 +13,14 @@ npx create-react-app crwn-clothing --template cra-template-paw
 yarn add redux redux-logger react-redux
 ```
 
-## Reslect
+### Reslect
 ```shell
 yarn add reselect
+```
+
+### Redux Persist
+```shell
+yarn add redux-persist
 ```
 
 * https://github.com/ZhangMYihua
