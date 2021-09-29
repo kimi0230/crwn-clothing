@@ -1,15 +1,20 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import HomePage from "./views/homepage/homepage";
-import ShopPage from "./views/shop/shop";
-import SignInSignUpPage from "./views/signin_signup/signin_signup";
-import Header from "./components/header/header.component.js";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { onSnapshot } from "firebase/firestore";
-import "./App.css";
-
+import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selectors";
+
+import Header from "./components/header/header.component.js";
+import HomePage from "./views/homepage/homepage";
+import ShopPage from "./views/shop/shop";
+import CheckoutPage from "./views/checkout/checkout";
+import SignInSignUpPage from "./views/signin_signup/signin_signup";
+
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { onSnapshot } from "firebase/firestore";
+
+import "./App.css";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -23,7 +28,6 @@ class App extends React.Component {
         // https://firebase.google.com/docs/firestore/query-data/listen#web-version-9
         const userRef = await createUserProfileDocument(userAuth);
         onSnapshot(userRef, (doc) => {
-          console.log("Snapshot data: ", doc.data());
           // console.log("Snapshot id: ", doc.id);
           setCurrentUser({
             id: doc.id,
@@ -46,6 +50,7 @@ class App extends React.Component {
         <div>
           <Header />
           <Switch>
+            {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route
@@ -59,6 +64,7 @@ class App extends React.Component {
                 )
               }
             />
+            <Route exact path="/checkout" component={CheckoutPage} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -66,8 +72,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
