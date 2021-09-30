@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-import Header from "./components/header/header.component.js";
+import Header from "./components/header/header.component";
 import HomePage from "./views/homepage/homepage";
 import ShopPage from "./views/shop/shop";
 import CheckoutPage from "./views/checkout/checkout";
