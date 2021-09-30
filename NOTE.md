@@ -29,7 +29,33 @@ const mapDispatchToProps = (dispatch) => ({
 });
 ```
 
-### Redux Persist
+
+## Reselect 
+是一個簡單的 library 可以用來建立會自動記憶、可組合的 selector function。可以用 Reselect 的 selector 來有效率的從 Redux store 計算衍生資料. 避免每次 component 更新的時候都會觸發
+
+1. src/redux/user/user.selectors.js
+```javascript
+import { createSelector } from "reselect";
+
+// 這個是 input-selector
+const selectUser = (state) => state.user;
+
+// selectCurrentUser 是 memoized selector。它接收 selectUser 作為 input-selector
+export const selectCurrentUser = createSelector(
+  [selectUser],
+  (user) => user.currentUser
+);
+```
+
+2. src/app.js
+```javascript
+import { selectCurrentUser } from "./redux/user/user.selectors";
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+```
+
+## Redux Persist
 1. src/redux/store.js
 
 ```javascript
