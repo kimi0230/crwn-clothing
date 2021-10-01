@@ -1,4 +1,5 @@
 # crwn-clothing
+[![Build and Deploy](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml/badge.svg)](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml)
 
 React, Firebase v9(auth, firestore)
 
