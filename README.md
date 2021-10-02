@@ -38,10 +38,11 @@ curl https://api.stripe.com/v1/tokens \
   -d "card[exp_year]"=2023 \
   -d "card[cvc]"=1233
 ```
+## Miscellaneous
+1. [GitHub Pages doesn't natively support single page apps. When there is a fresh page load for a url like example.tld/foo, where /foo is a frontend route, the GitHub Pages server returns 404 because it knows nothing of /foo.](https://github.com/rafgraph/spa-github-pages)
 
-
-
-* https://github.com/ZhangMYihua
+## Reference
+* [https://github.com/ZhangMYihua](https://github.com/ZhangMYihua)
 * [cubic-bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)
 * [react router](https://reactrouter.com/web/guides/quick-start)
 * [Firebase Doc](https://firebase.google.com/docs/web/setup?hl=en)
