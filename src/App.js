@@ -52,11 +52,11 @@ class App extends React.Component {
           <Header />
           <Switch>
             {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
-            <Route exact path="/crwn-clothing//" component={HomePage} />
-            <Route path="/crwn-clothing//shop" component={ShopPage} />
+            <Route exact path="/crwn-clothing/" component={HomePage} />
+            <Route path="/crwn-clothing/shop" component={ShopPage} />
             <Route
               exact
-              path="/crwn-clothing//signin"
+              path="/crwn-clothing/signin"
               render={() =>
                 this.props.currentUser ? (
                   <Redirect to="/" />
@@ -67,7 +67,7 @@ class App extends React.Component {
             />
             <Route
               exact
-              path="/crwn-clothing//checkout"
+              path="/crwn-clothing/checkout"
               component={CheckoutPage}
             />
           </Switch>
