@@ -46,16 +46,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      // basename={process.env.PUBLIC_URL}
+      <BrowserRouter>
         <div>
           <Header />
           <Switch>
             {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
-            <Route exact path="/" component={HomePage} />
-            <Route path="/shop" component={ShopPage} />
+            <Route exact path="/crwn-clothing//" component={HomePage} />
+            <Route path="/crwn-clothing//shop" component={ShopPage} />
             <Route
               exact
-              path="/signin"
+              path="/crwn-clothing//signin"
               render={() =>
                 this.props.currentUser ? (
                   <Redirect to="/" />
@@ -64,7 +65,11 @@ class App extends React.Component {
                 )
               }
             />
-            <Route exact path="/checkout" component={CheckoutPage} />
+            <Route
+              exact
+              path="/crwn-clothing//checkout"
+              component={CheckoutPage}
+            />
           </Switch>
         </div>
       </BrowserRouter>
