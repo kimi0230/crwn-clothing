@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  writeBatch,
+  collection,
+} from "firebase/firestore";
+
 import {
   getAuth,
   GoogleAuthProvider,
@@ -58,6 +66,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  // https://firebase.google.com/docs/firestore/manage-data/transactions
+
+  // Get a new write batch
+  const batch = writeBatch(firestore);
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = doc(collection(firestore, collectionKey));
+    batch.set(newDocRef, obj);
+  });
+  await batch.commit();
 };
 
 // 登入, 註冊時, 跳出google帳號選擇
