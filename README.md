@@ -28,6 +28,11 @@ yarn add redux-persist
 ```shell
 yarn add react-stripe-checkout
 ```
+## styled-components
+https://github.com/styled-components/styled-components
+```shell
+yarn add styled-components
+```
 
 ##### [create a test credit card](https://stripe.com/docs/api/tokens/create_card)
 ```shell
