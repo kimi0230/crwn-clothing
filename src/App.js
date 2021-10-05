@@ -36,6 +36,11 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      // 測試將首頁的 collection放入firebase
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
@@ -74,6 +79,9 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+
+  // 測試將首頁的 collection放入firebase
+  // collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
