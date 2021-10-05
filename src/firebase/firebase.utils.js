@@ -83,6 +83,24 @@ export const addCollectionAndDocuments = async (
   await batch.commit();
 };
 
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
+
 // 登入, 註冊時, 跳出google帳號選擇
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
