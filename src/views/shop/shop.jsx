@@ -11,10 +11,21 @@ import {
 
 import { connect } from "react-redux";
 import { updateCollections } from "../../redux/shop/shop.actions";
+
+import WithSpinner from "../../components/with_spinner/with_spinner.component";
+
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
 class ShopPage extends React.Component {
+  state = {
+    loading: true,
+  };
+
   unsubscribeFromSnapshop = null;
 
   componentDidMount() {
+    const { updateCollections } = this.props;
     const collectionRef = collection(firestore, "collections");
 
     // 監聽 collections
@@ -22,17 +33,27 @@ class ShopPage extends React.Component {
       // 將 collection 裏面所有的document 轉成 map
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
+      this.setState({ loading: false });
     });
   }
 
   render() {
     const { match } = this.props;
+    const { loading } = this.state;
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionsOverview} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={(props) => (
+            <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
+          )}
+        />
         <Route
           path={`${match.path}/:collectionId`}
-          component={CollectionPage}
+          render={(props) => (
+            <CollectionPageWithSpinner isLoading={loading} {...props} />
+          )}
         ></Route>
       </div>
     );
@@ -40,7 +61,8 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateCollections: (collectionsMap) => dispatch(updateCollections),
+  updateCollections: (collectionsMap) =>
+    dispatch(updateCollections(collectionsMap)),
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);
