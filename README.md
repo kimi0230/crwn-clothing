@@ -1,7 +1,7 @@
 # crwn-clothing
 [![Build and Deploy](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml/badge.svg)](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml)
 
-React, Firebase v9(auth, firestore)
+React, rewrite Firebase to v9(auth, firestore)
 
 
 ## CRA create PWA
@@ -10,29 +10,42 @@ npx create-react-app crwn-clothing --template cra-template-paw
 ```
 
 ## Redux
+https://github.com/reduxjs/redux
 ```shell
 yarn add redux redux-logger react-redux
 ```
 
-### Reslect
+##### Reslect
+https://github.com/reduxjs/reselect
 ```shell
 yarn add reselect
 ```
 
-### Redux Persist
+##### Redux Persist
+https://github.com/rt2zz/redux-persist
 ```shell
 yarn add redux-persist
 ```
 
-### React stripe checkout
+##### Redux-thunk
+https://github.com/reduxjs/redux-thunk
+原本的action creator 都是回傳action object.
+在Redux Thunk裡面會檢查若action不是object而是function，就會執行function後再將action往下傳，直到回傳object才會進去reducers
+```shell
+yarn add redux-thunk
+```
+
+##### React stripe checkout
+https://github.com/azmenak/react-stripe-checkout
 ```shell
 yarn add react-stripe-checkout
 ```
-## styled-components
+## Styled-components
 https://github.com/styled-components/styled-components
 ```shell
 yarn add styled-components
 ```
+
 
 ##### [create a test credit card](https://stripe.com/docs/api/tokens/create_card)
 ```shell
@@ -56,3 +69,5 @@ curl https://api.stripe.com/v1/tokens \
 * [https://stripe.com/](https://stripe.com/)
 * [Create Github Pages](https://ithelp.ithome.com.tw/articles/10228423)
 * [spa-github-pages](https://github.com/rafgraph/spa-github-pages)
+* [higher order components](https://github.com/ZhangMYihua/higher-order-components-explained)
+* [Firebase REST API](https://firebase.google.com/docs/firestore/use-rest-api#making_rest_calls)
