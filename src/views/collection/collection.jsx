@@ -6,6 +6,7 @@ import { selectCollection } from "../../redux/shop/shop.selectors";
 
 import "./collection.styles.scss";
 
+// 商品分類頁面 : /crwn-clothing/shop/hats
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
   return (
