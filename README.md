@@ -17,20 +17,31 @@ yarn add redux redux-logger react-redux
 
 ##### Reslect
 https://github.com/reduxjs/reselect
+
+Reselect 是一個簡單的 library 可以用來建立會自動記憶,可組合的 selector function.
+可以用 Reselect 的 selector 來有效率的從 Redux store 計算衍生資料
 ```shell
 yarn add reselect
 ```
 
 ##### Redux Persist
 https://github.com/rt2zz/redux-persist
+
+如果使用者重新整理了網頁,
+之前通過redux儲存的全域性資料就會被全部清空.
+所以需要使用redux-persist管理瀏覽器的localStorage.
 ```shell
 yarn add redux-persist
 ```
 
 ##### Redux-thunk
 https://github.com/reduxjs/redux-thunk
+
 原本的action creator 都是回傳action object.
-在Redux Thunk裡面會檢查若action不是object而是function，就會執行function後再將action往下傳，直到回傳object才會進去reducers
+在Redux Thunk裡面會檢查若action不是object而是function,
+就會執行function後再將action往下傳,
+直到回傳object才會進去reducers.
+可用來處理async
 ```shell
 yarn add redux-thunk
 ```
