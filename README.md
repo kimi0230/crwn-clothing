@@ -46,6 +46,11 @@ https://github.com/reduxjs/redux-thunk
 yarn add redux-thunk
 ```
 
+##### Redux-saga
+```shell
+yarn add redux-saga
+```
+
 Reducers fire first, then sagas receive the action. From there, sagas can fire off new actions which in turn hit the reducers and other sagas as well!
 ##### React stripe checkout
 https://github.com/azmenak/react-stripe-checkout
