@@ -43,6 +43,6 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-// withRouter：一個HOC，可以把match、location、history當成props傳入component中
+// withRouter：一個HOC(Higher-Order Components)，可以把match、location、history當成props傳入component中
 // withRouter 將在每次使用與渲染相同的道具改變路線時重新渲染其組件props: { match, location, history }
 export default withRouter(connect(mapStateToProps)(CartDropdown));

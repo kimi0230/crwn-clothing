@@ -63,6 +63,7 @@ class App extends React.Component {
               path="/signin"
               render={() =>
                 this.props.currentUser ? (
+                  // 登入後跳轉至首頁
                   <Redirect to="/" />
                 ) : (
                   <SignInSignUpPage />

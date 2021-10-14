@@ -102,9 +102,9 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 };
 
 // 登入, 註冊時, 跳出google帳號選擇
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = async () =>
-  await signInWithPopup(auth, provider);
+  await signInWithPopup(auth, googleProvider);
 
 export default app;
