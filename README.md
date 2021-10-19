@@ -88,3 +88,4 @@ curl https://api.stripe.com/v1/tokens \
 * [spa-github-pages](https://github.com/rafgraph/spa-github-pages)
 * [higher order components](https://github.com/ZhangMYihua/higher-order-components-explained)
 * [Firebase REST API](https://firebase.google.com/docs/firestore/use-rest-api#making_rest_calls)
+* [Router match](https://ithelp.ithome.com.tw/articles/10204451)
