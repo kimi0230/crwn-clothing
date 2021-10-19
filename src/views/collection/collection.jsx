@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CollectionItem from "../../components/collection_item/collection_item.component";
 
 import { connect } from "react-redux";
@@ -8,6 +8,9 @@ import "./collection.styles.scss";
 
 // 商品分類頁面 : /crwn-clothing/shop/hats
 const CollectionPage = ({ collection }) => {
+  useEffect(() => {
+    return () => {};
+  });
   const { title, items } = collection;
   return (
     <div className="collection-page">
