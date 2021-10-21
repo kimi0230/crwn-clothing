@@ -1,13 +1,16 @@
 import React from "react";
 import CollectionItem from "../../components/collection_item/collection_item.component";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { selectCollection } from "../../redux/shop/shop.selectors";
 
 import "./collection.styles.scss";
 
 // 商品分類頁面 : /crwn-clothing/shop/hats
-const CollectionPage = ({ collection }) => {
+const CollectionPage = () => {
+  const { collectionId } = useParams();
+  const collection = useSelector(selectCollection(collectionId));
   const { title, items } = collection;
   return (
     <div className="collection-page">
@@ -21,8 +24,4 @@ const CollectionPage = ({ collection }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.match.params.collectionId)(state),
-});
-
-export default connect(mapStateToProps)(CollectionPage);
+export default CollectionPage;
