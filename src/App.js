@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser, checkUserSession } from "./redux/user/user.actions";
-import { selectCurrentUser } from "./redux/user/user.selectors";
 
 import Header from "./components/header/header.component";
 import HomePage from "./views/homepage/homepage";
@@ -13,10 +11,13 @@ import SignInSignUpPage from "./views/signin_signup/signin_signup";
 
 import "./App.css";
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = () => {
+  const currentUser = useSelector(setCurrentUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    checkUserSession();
-  }, [checkUserSession]);
+    dispatch(checkUserSession());
+  }, [dispatch]); // 這樣寫 dispatch只會執行一次
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -45,16 +46,4 @@ const App = ({ checkUserSession, currentUser }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-
-  // 測試將首頁的 collection放入firebase
-  // collectionsArray: selectCollectionsForPreview,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  checkUserSession: () => dispatch(checkUserSession()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
