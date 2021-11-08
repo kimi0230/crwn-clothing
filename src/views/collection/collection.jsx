@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CollectionItem from "../../components/collection_item/collection_item.component";
 
 import CollectionsContext from "../../contexts/collections/collections.context";
@@ -7,23 +7,18 @@ import "./collection.styles.scss";
 
 // 商品分類頁面 : /crwn-clothing/shop/hats
 const CollectionPage = ({ match }) => {
+  const collections = useContext(CollectionsContext);
+  const collection = collections[match.params.collectionId];
+  const { title, items } = collection;
   return (
-    <CollectionsContext.Consumer>
-      {(collections) => {
-        const collection = collections[match.params.collectionId];
-        const { title, items } = collection;
-        return (
-          <div className="collection-page">
-            <h2 className="title">{title}</h2>
-            <div className="items">
-              {items.map((item) => (
-                <CollectionItem key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        );
-      }}
-    </CollectionsContext.Consumer>
+    <div className="collection-page">
+      <h2 className="title">{title}</h2>
+      <div className="items">
+        {items.map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </div>
+    </div>
   );
 };
 
