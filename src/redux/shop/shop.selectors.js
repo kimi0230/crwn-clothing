@@ -1,8 +1,21 @@
 import { createSelector } from "reselect";
 
-// state.shop 的 shop 指得是在 root_reducer.js的 `shop: shopReducer,`
+// state.shop 的 shop 指的是在 root_reducer.js
+//const rootReducer = combineReducers({
+//   user: userReducer,
+//   cart: cartReducer,
+//   directory: directoryReducer,
+//   shop: shopReducer,  ----> 這個
+// });
+
 const selectShop = (state) => state.shop;
 
+//shop.reducer.js
+// const INITIAL_STATE = {
+//   collections: null, ---> 抓這個
+//   isFetching: false,
+//   errorMessage: undefined,
+// };
 export const selectCollections = createSelector(
   [selectShop],
   (shop) => shop.collections
