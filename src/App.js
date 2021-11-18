@@ -6,6 +6,7 @@ import { setCurrentUser, checkUserSession } from "./redux/user/user.actions";
 import Header from "./components/header/header.component";
 import HomePage from "./views/homepage/homepage";
 import ShopPage from "./views/shop/shop";
+import ShopPageGQL from "./views/shop/shop_gql";
 import CheckoutPage from "./views/checkout/checkout";
 import SignInSignUpPage from "./views/signin_signup/signin_signup";
 
@@ -27,6 +28,7 @@ const App = () => {
           {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route path="/shopGQL" component={ShopPageGQL} />
           <Route
             exact
             path="/signin"

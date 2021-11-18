@@ -73,6 +73,14 @@ curl https://api.stripe.com/v1/tokens \
   -d "card[exp_year]"=2023 \
   -d "card[cvc]"=1233
 ```
+## GraphQL
+```
+yarn add apollo-boost react-apollo graphql
+```
+
+### GraphQL Server
+https://crwn-clothing.com/
+
 ## Miscellaneous
 1. [GitHub Pages doesn't natively support single page apps. When there is a fresh page load for a url like example.tld/foo, where /foo is a frontend route, the GitHub Pages server returns 404 because it knows nothing of /foo.](https://github.com/rafgraph/spa-github-pages)
 
