@@ -21,6 +21,7 @@ const GET_COLLECTIONS = gql`
 `;
 
 const CollectionsOverviewContainerGQL = () => (
+  // https://github.com/apollographql/react-apollo/issues/1686
   <Query query={GET_COLLECTIONS}>
     {({ loading, error, data }) => {
       console.log("loading:", loading);
@@ -29,7 +30,8 @@ const CollectionsOverviewContainerGQL = () => (
       if (loading) {
         return <Spinner></Spinner>;
       }
-      return <CollectionOverviewGQL collections={data.collections} />;
+      const { getCollectionsByTitle } = data;
+      return <CollectionOverviewGQL collection={getCollectionsByTitle} />;
     }}
   </Query>
 );
