@@ -1,6 +1,5 @@
 import React from "react";
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
+import { useQuery, gql } from "@apollo/client";
 
 import Spinner from "../../components/spinner/spinner.component";
 
@@ -21,19 +20,35 @@ const GET_COLLECTIONS_BY_TITLE = gql`
   }
 `;
 
-const CollectionPageContainerGQL = ({ match }) => (
-  <Query
-    query={GET_COLLECTIONS_BY_TITLE}
-    variables={{ title: match.params.collectionId }}
-  >
-    {({ loading, error, data }) => {
-      if (loading) {
-        return <Spinner></Spinner>;
-      }
-      const getCollectionsByTitle = data.getCollectionsByTitle;
-      return <CollectionPageGQL collections={getCollectionsByTitle} />;
-    }}
-  </Query>
-);
+const CollectionPageContainerGQL = ({ match }) => {
+  // V2
+  // <Query
+  //   query={GET_COLLECTIONS_BY_TITLE}
+  //   variables={{ title: match.params.collectionId }}
+  // >
+  //   {({ loading, error, data }) => {
+  //     if (loading) {
+  //       return <Spinner></Spinner>;
+  //     }
+  //     const getCollectionsByTitle = data.getCollectionsByTitle;
+  //     return <CollectionPageGQL collections={getCollectionsByTitle} />;
+  //   }}
+  // </Query>
+
+  // V3
+  const { loading, error, data } = useQuery(GET_COLLECTIONS_BY_TITLE, {
+    variables: { title: match.params.collectionId },
+  });
+
+  if (loading) {
+    return <Spinner></Spinner>;
+  }
+  if (error) {
+    return `Error! ${error}`;
+  }
+
+  const getCollectionsByTitle = data.getCollectionsByTitle;
+  return <CollectionPageGQL collections={getCollectionsByTitle} />;
+};
 
 export default CollectionPageContainerGQL;
