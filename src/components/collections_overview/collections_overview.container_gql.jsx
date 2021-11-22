@@ -30,8 +30,8 @@ const CollectionsOverviewContainerGQL = () => (
       if (loading) {
         return <Spinner></Spinner>;
       }
-      const { getCollectionsByTitle } = data;
-      return <CollectionOverviewGQL collection={getCollectionsByTitle} />;
+      const getCollectionsByTitle = data.collections;
+      return <CollectionOverviewGQL collections={getCollectionsByTitle} />;
     }}
   </Query>
 );
