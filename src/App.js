@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser, checkUserSession } from "./redux/user/user.actions";
 
 import Header from "./components/header/header.component";
+import { default as HeaderGQL } from "./components/header/header.container_gql";
 import HomePage from "./views/homepage/homepage";
 import ShopPage from "./views/shop/shop";
 import ShopPageGQL from "./views/shop/shop_gql";
@@ -24,6 +25,7 @@ const App = () => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
         <Header />
+        <HeaderGQL />
         <Switch>
           {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
           <Route exact path="/" component={HomePage} />
