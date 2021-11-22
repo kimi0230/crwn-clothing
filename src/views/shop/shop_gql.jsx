@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 // https://openhome.cc/Gossip/ECMAScript/Export.html
 import { default as CollectionsOverviewContainerGQL } from "../../components/collections_overview/collections_overview.container_gql";
 
-import CollectionPageContainer from "../collection/collection.container";
+import { default as CollectionPageContainerGQL } from "../collection/collection.container_gql";
 
 const ShopPage = ({ match }) => {
   return (
@@ -16,7 +16,7 @@ const ShopPage = ({ match }) => {
       />
       <Route
         path={`${match.path}/:collectionId`}
-        component={CollectionPageContainer}
+        component={CollectionPageContainerGQL}
       ></Route>
     </div>
   );

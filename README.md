@@ -1,8 +1,8 @@
 # crwn-clothing
 [![Build and Deploy](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml/badge.svg)](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml)
 
-React, rewrite Firebase to v9(auth, firestore)
-
+React, rewrite Firebase to v9(auth, firestore), @apollo/client v3
+ 
 
 ## CRA create PWA
 ```shell
@@ -74,9 +74,16 @@ curl https://api.stripe.com/v1/tokens \
   -d "card[cvc]"=1233
 ```
 ## GraphQL
+
+```shell
+yarn add @apollo/client graphql 
 ```
-yarn add apollo-boost react-apollo graphql
-```
+
+### Resolvers
+https://www.apollographql.com/docs/apollo-server/data/resolvers/
+
+### Cache
+https://www.apollographql.com/docs/react/caching/cache-configuration/
 
 ### GraphQL Server
 https://crwn-clothing.com/
