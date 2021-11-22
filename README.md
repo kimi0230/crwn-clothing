@@ -74,6 +74,7 @@ curl https://api.stripe.com/v1/tokens \
   -d "card[cvc]"=1233
 ```
 ## GraphQL
+example: https://github.com/ZhangMYihua/graphql-practice-complete
 
 ```shell
 yarn add @apollo/client graphql 
