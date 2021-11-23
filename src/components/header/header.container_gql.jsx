@@ -1,16 +1,10 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
-
-import Header from "./header.component";
-
-const GET_CLIENT_PROPERTIES = gql`
-  {
-    cartHidden @client
-  }
-`;
+import { useQuery } from "@apollo/client";
+import HeaderGQL from "./header.component_gql";
+import { GET_CART_HIDDEN } from "../../graphql/schema";
 
 const HeaderContainerGQL = () => {
-  const { loading, error, data } = useQuery(GET_CLIENT_PROPERTIES);
+  const { loading, error, data } = useQuery(GET_CART_HIDDEN);
 
   if (loading) {
     return <p>Loading</p>;
@@ -19,8 +13,9 @@ const HeaderContainerGQL = () => {
   if (error) {
     return <p>Error :(</p>;
   }
-  console.log("kkkkkkk", data);
-  return <Header hidden={false} />;
+
+  console.log("HeaderContainerGQL: data.cartHidden", data.cartHidden);
+  return <HeaderGQL hidden={data.cartHidden} />;
 };
 
 export default HeaderContainerGQL;

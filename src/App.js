@@ -24,7 +24,7 @@ const App = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
-        <Header />
+        {/* <Header /> */}
         <HeaderGQL />
         <Switch>
           {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}

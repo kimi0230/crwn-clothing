@@ -9,17 +9,12 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, gql } from "@apollo/client";
+import { cache } from "./graphql/cache";
 
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-const cache = new InMemoryCache();
 const client = new ApolloClient({
   uri: "https://crwn-clothing.com",
   cache: cache,
@@ -41,7 +36,9 @@ client
       }
     `,
   })
-  .then((res) => console.log(res));
+  .then((res) => {
+    console.log("test graphql", res);
+  });
 
 ReactDOM.render(
   <ApolloProvider client={client}>

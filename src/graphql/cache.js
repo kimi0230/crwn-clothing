@@ -1,14 +1,14 @@
 import { makeVar, InMemoryCache } from "@apollo/client";
 
-export const cartHidden = makeVar(true);
+export const cartHiddenVar = makeVar(true);
 
 export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        cartItems: {
+        cartHidden: {
           read() {
-            return cartHidden();
+            return cartHiddenVar();
           },
         },
       },
