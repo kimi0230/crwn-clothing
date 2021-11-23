@@ -74,6 +74,7 @@ curl https://api.stripe.com/v1/tokens \
   -d "card[cvc]"=1233
 ```
 ## GraphQL
+example: https://github.com/ZhangMYihua/graphql-practice-complete
 
 ```shell
 yarn add @apollo/client graphql 
@@ -107,3 +108,4 @@ https://crwn-clothing.com/
 * [React Hooks](https://reactjs.org/docs/hooks-reference.html)
 * [React Redux Hooks](https://react-redux.js.org/api/hooks)
 * [ZhangMYihua/useReducer-example](https://github.com/ZhangMYihua/useReducer-example)
+* [reactjs - Apollo Client Reactive 变量 - 更新值后不触发重新渲染](https://www.coder.work/article/7776722)
