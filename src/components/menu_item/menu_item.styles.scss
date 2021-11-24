@@ -1,6 +1,6 @@
 .menu-item {
   min-width: 30%;
-  height: 240px;
+  height: 380px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -22,10 +22,6 @@
     }
   }
 
-  &.large {
-    height: 380px;
-  }
-
   &:first-child {
     margin-right: 7.5px;
   }
@@ -34,11 +30,16 @@
     margin-left: 7.5px;
   }
 
+  // 小尺寸, (最好預設是從小尺寸寫, 再來用media切出大尺寸)
+  @media screen and (max-width: 800px) {
+    height: 240px;
+  }
+
   .background-image {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: top center;
   }
 
   .content {

@@ -11,7 +11,8 @@ import ShopPageGQL from "./views/shop/shop_gql";
 import CheckoutPage from "./views/checkout/checkout";
 import SignInSignUpPage from "./views/signin_signup/signin_signup";
 
-import "./App.css";
+// import "./App.css";
+import { GlobalStyle } from "./global.styles";
 
 const App = () => {
   const currentUser = useSelector(setCurrentUser);
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
+        <GlobalStyle />
         <Header />
         {/* <HeaderGQL /> */}
         <Switch>
