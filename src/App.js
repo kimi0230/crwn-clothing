@@ -1,7 +1,9 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { setCurrentUser, checkUserSession } from "./redux/user/user.actions";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { checkUserSession } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 
 import Header from "./components/header/header.component";
 import Spinner from "./components/spinner/spinner.component";
@@ -9,23 +11,19 @@ import Spinner from "./components/spinner/spinner.component";
 
 // import "./App.css";
 import { GlobalStyle } from "./global.styles";
-import SignInSignUpPage from "./views/signin_signup/signin_signup";
 
 const HomePage = lazy(() => import("./views/homepage/homepage"));
 const ShopPage = lazy(() => import("./views/shop/shop"));
 const ShopPageGQL = lazy(() => import("./views/shop/shop_gql"));
 const CheckoutPage = lazy(() => import("./views/checkout/checkout"));
-// const SignInSignUpPage = lazy(() =>
-//   import("./views/signin_signup/signin_signup")
-// );
+const SignInSignUpPage = lazy(() =>
+  import("./views/signin_signup/signin_signup")
+);
 
-const App = () => {
-  const currentUser = useSelector(setCurrentUser);
-  const dispatch = useDispatch();
-
+const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
-    dispatch(checkUserSession());
-  }, [dispatch]); // 這樣寫 dispatch只會執行一次
+    checkUserSession();
+  }, [checkUserSession]);
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -59,4 +57,12 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
