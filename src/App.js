@@ -12,6 +12,8 @@ import Spinner from "./components/spinner/spinner.component";
 // import "./App.css";
 import { GlobalStyle } from "./global.styles";
 
+import ErrorBoundary from "./components/error_boundary/error-boundary.component";
+
 const HomePage = lazy(() => import("./views/homepage/homepage"));
 const ShopPage = lazy(() => import("./views/shop/shop"));
 const ShopPageGQL = lazy(() => import("./views/shop/shop_gql"));
@@ -32,25 +34,27 @@ const App = ({ checkUserSession, currentUser }) => {
         <Header />
         {/* <HeaderGQL /> */}
         <Switch>
-          <Suspense fallback={<Spinner />}>
-            {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
-            <Route exact path="/" component={HomePage} />
-            <Route path="/shop" component={ShopPage} />
-            <Route path="/shopGQL" component={ShopPageGQL} />
-            <Route
-              exact
-              path="/signin"
-              render={() =>
-                currentUser ? (
-                  // 登入後跳轉至首頁
-                  <Redirect to="/" />
-                ) : (
-                  <SignInSignUpPage />
-                )
-              }
-            />
-            <Route exact path="/checkout" component={CheckoutPage} />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Spinner />}>
+              {/* exact控制匹配到/路徑時不會再繼續向下匹配 */}
+              <Route exact path="/" component={HomePage} />
+              <Route path="/shop" component={ShopPage} />
+              <Route path="/shopGQL" component={ShopPageGQL} />
+              <Route
+                exact
+                path="/signin"
+                render={() =>
+                  currentUser ? (
+                    // 登入後跳轉至首頁
+                    <Redirect to="/" />
+                  ) : (
+                    <SignInSignUpPage />
+                  )
+                }
+              />
+              <Route exact path="/checkout" component={CheckoutPage} />
+            </Suspense>
+          </ErrorBoundary>
         </Switch>
       </div>
     </BrowserRouter>
