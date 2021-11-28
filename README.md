@@ -112,3 +112,4 @@ https://crwn-clothing.com/
 * [scss media](https://codepen.io/cp/pen/YzyveMP?editors=1100)
 * [crwn-live](https://crwn-live.herokuapp.com)
 * [React Performance Cheat Sheet](https://houssein.me/progressive-react)
+* [realfavicongenerator](https://realfavicongenerator.net/)
