@@ -7,3 +7,8 @@ express server. used for stripe payment callback.
 
 ## start develop env
 `yarn dev`
+
+
+## Note
+### ssl
+`yarn add express-sslify`
