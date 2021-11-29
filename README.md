@@ -1,9 +1,19 @@
 # crwn-clothing
 [![Build and Deploy](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml/badge.svg)](https://github.com/kimi0230/crwn-clothing/actions/workflows/deploy-to-gh-pages.yml)
 
-React, rewrite Firebase to v9(auth, firestore), @apollo/client v3
+React, Redux, Saga, Firebase(auth, firestore) v9, @apollo/client v3
  
+Demo : https://kimi0230.github.io/crwn-clothing/
+# Run local server
+```shell
+cd server
+yarn dev
+```
 
+# Miscellaneous
+1. [GitHub Pages doesn't natively support single page apps. When there is a fresh page load for a url like example.tld/foo, where /foo is a frontend route, the GitHub Pages server returns 404 because it knows nothing of /foo.](https://github.com/rafgraph/spa-github-pages)
+
+# My Notes
 ## CRA create PWA
 ```shell
 npx create-react-app crwn-clothing --template cra-template-paw
@@ -80,19 +90,16 @@ example: https://github.com/ZhangMYihua/graphql-practice-complete
 yarn add @apollo/client graphql 
 ```
 
-### Resolvers
+##### Resolvers
 https://www.apollographql.com/docs/apollo-server/data/resolvers/
 
-### Cache
+##### Cache
 https://www.apollographql.com/docs/react/caching/cache-configuration/
 
-### GraphQL Server
+## GraphQL Server URI
 https://crwn-clothing.com/
 
-## Miscellaneous
-1. [GitHub Pages doesn't natively support single page apps. When there is a fresh page load for a url like example.tld/foo, where /foo is a frontend route, the GitHub Pages server returns 404 because it knows nothing of /foo.](https://github.com/rafgraph/spa-github-pages)
-
-## Reference
+# Reference
 * [https://github.com/ZhangMYihua](https://github.com/ZhangMYihua)
 * [cubic-bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)
 * [react router](https://reactrouter.com/web/guides/quick-start)
