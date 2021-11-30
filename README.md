@@ -106,7 +106,7 @@ https://crwn-clothing.com/
 * [cheat sheet](https://github.com/sapegin/jest-cheat-sheet)
 * [testing-exercise](https://github.com/aneagoie/testing-exercise)
 * [robofriends-testing](https://github.com/aneagoie/robofriends-testing)
-
+* [lesson-34](https://github.com/ZhangMYihua/lesson-34)
 # Reference
 * [https://github.com/ZhangMYihua](https://github.com/ZhangMYihua)
 * [cubic-bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)
