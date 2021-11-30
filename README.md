@@ -99,6 +99,14 @@ https://www.apollographql.com/docs/react/caching/cache-configuration/
 ## GraphQL Server URI
 https://crwn-clothing.com/
 
+## Testing
+`yarn add --dev jest`
+
+* [docs](https://jestjs.io/docs/getting-started)
+* [cheat sheet](https://github.com/sapegin/jest-cheat-sheet)
+* [testing-exercise](https://github.com/aneagoie/testing-exercise)
+* [robofriends-testing](https://github.com/aneagoie/robofriends-testing)
+
 # Reference
 * [https://github.com/ZhangMYihua](https://github.com/ZhangMYihua)
 * [cubic-bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)
