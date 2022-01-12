@@ -7,7 +7,7 @@ Demo : https://kimi0230.github.io/crwn-clothing/
 # Run local server
 ```shell
 cd server
-yarn dev
+yarn start
 ```
 
 # Miscellaneous
@@ -128,3 +128,4 @@ https://crwn-clothing.com/
 * [crwn-live](https://crwn-live.herokuapp.com)
 * [React Performance Cheat Sheet](https://houssein.me/progressive-react)
 * [realfavicongenerator](https://realfavicongenerator.net/)
+* [redux : chentsulin](https://chentsulin.github.io/redux/index.html)
